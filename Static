@@ -1,0 +1,25 @@
+public class StaticDemo {
+    static int count;
+
+    static{
+        count=10;
+        System.out.println("Static block exexcuted:");
+    }
+
+    static void show()
+    {
+        System.out.println("Value of count= "+count);
+    }
+
+    public static void main(String[]a)
+    {
+        System.out.println("main method");
+        StaticDemo.show();
+        count=20;
+        StaticDemo.show();
+        
+
+
+        
+    
+}
