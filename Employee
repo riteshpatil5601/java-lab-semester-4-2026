@@ -1,0 +1,72 @@
+public class Employee
+{
+    String firstName;
+    String lastName;
+    double salary;
+
+    Employee(String firstName,String lastName,double salary)
+    {
+        System.out.println("F.name:"+firstName);
+        System.out.println("L.name:"+lastName);
+        System.out.println("salary:"+salary);
+    }
+
+    public void setter(String newName,String N)
+    {
+           this.firstName=newName;
+           this.lastName=N;
+    
+        }
+        
+        public String getter()
+        {
+            return (firstName + " "+lastName);
+        }
+        public void setSalary( double s)
+        {
+            
+            if(salary<0)
+                {
+                    salary=0.0;
+                }
+                this.salary= s;
+        }
+        public double getSalary()
+        {
+            return salary;
+        }
+        public double raise()
+        {
+            if(salary<0)
+            {
+                salary=0.0;
+            }
+            else
+            {
+            salary= salary + (salary*10)/100;
+            }
+        
+            return salary;
+        }
+
+
+        public static void main( String []a)
+        {
+            Employee e1=new Employee("gojo","satoru",100000.0);
+            Employee e2=new Employee("yuji","itadori",70000.0);
+         System.out.println("Yearly salary before raise:");
+         System.out.println(e1.getter()+e1.getSalary());
+         System.out.println(e2.getter()+e2.getSalary());
+         System.out.println("Yearly salary after raise:");
+         System.out.println(e1.getter()+e1.raise());
+         System.out.println(e2.getter()+e2.raise());
+
+
+
+
+        }
+        
+        
+        
+
+}
