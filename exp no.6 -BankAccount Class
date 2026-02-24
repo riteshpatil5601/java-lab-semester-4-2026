@@ -1,0 +1,83 @@
+class Low extends Exception
+{
+    public Low (String message)
+    {
+        super(message);
+    }
+}
+class Negative extends Exception
+{
+    public Negative(String message)
+    {
+        super(message);
+    
+    }
+}
+
+class Main
+{
+    double balance = 5000;
+
+    void balanceEnquiry()
+    {
+        System.out.println("Current balance:"+balance);
+    }
+
+    void deposit(double amount) throws
+    Negative {
+        if(amount<0)
+        {
+            throw new Negative("Negative amount not allowed");
+        }
+
+        balance+=amount;
+        System.out.println("Deposited:"+amount);
+
+    }
+
+    void Withdraw(double amount) throws Low, Negative {
+        
+            if (amount<0)
+            {
+                throw new Negative("Negative amount not allowed.");
+
+            }
+            if(amount>balance)
+
+            {
+                throw new Low("Insufficient balance.");
+
+
+              }
+              balance-= amount;
+              System.out.println("Withdrawn:"+amount);
+
+        }
+    
+}
+public class BankAccount{
+    public static void main(String[]arg)
+    {
+        Main account = new Main();
+
+        try{
+            account.balanceEnquiry();
+            account.deposit(3000);
+            account.Withdraw(2000);
+            account.balanceEnquiry();
+        } catch (Negative e)
+        {
+            System.out.println("Error:"+e.getMessage());
+
+        } catch(Low e)
+        {
+            System.out.println("Error:"+e.getMessage());
+
+        }
+
+
+
+
+
+    }
+}
