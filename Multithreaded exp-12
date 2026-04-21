@@ -1,0 +1,86 @@
+import javax.swing.*;
+import java.awt.*;
+
+public class MultithreadedStopwatch extends JFrame {
+
+    private JLabel timeDisplay;
+    private JButton startBtn, stopBtn, resetBtn;
+
+    private volatile boolean running = false;
+    private long startTime = 0;
+    private long elapsedTime = 0;
+
+    private Thread timerThread;
+
+    public MultithreadedStopwatch() {
+        setTitle("Multithreaded Stopwatch");
+        setSize(350, 200);
+        setLayout(new BorderLayout());
+
+        timeDisplay = new JLabel("00:00:00", SwingConstants.CENTER);
+        timeDisplay.setFont(new Font("Arial", Font.BOLD, 40));
+        add(timeDisplay, BorderLayout.CENTER);
+
+        startBtn = new JButton("Start");
+        stopBtn = new JButton("Stop");
+        resetBtn = new JButton("Reset");
+
+        JPanel panel = new JPanel();
+        panel.add(startBtn);
+        panel.add(stopBtn);
+        panel.add(resetBtn);
+        add(panel, BorderLayout.SOUTH);
+
+        startBtn.addActionListener(e -> startTimer());
+        stopBtn.addActionListener(e -> stopTimer());
+        resetBtn.addActionListener(e -> resetTimer());
+
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setVisible(true);
+    }
+
+    private void startTimer() {
+        if (running) return;
+
+        running = true;
+        startTime = System.currentTimeMillis() - elapsedTime;
+
+        timerThread = new Thread(() -> {
+            while (running) {
+                elapsedTime = System.currentTimeMillis() - startTime;
+                String timeStr = formatTime(elapsedTime);
+
+                SwingUtilities.invokeLater(() -> timeDisplay.setText(timeStr));
+
+                try {
+                    Thread.sleep(100);
+                } catch (InterruptedException e) {
+                    break;
+                }
+            }
+        });
+
+        timerThread.start();
+    }
+
+    private void stopTimer() {
+        running = false;
+    }
+
+    private void resetTimer() {
+        running = false;
+        elapsedTime = 0;
+        timeDisplay.setText("00:00:00");
+    }
+
+    private String formatTime(long ms) {
+        long seconds = (ms / 1000) % 60;
+        long minutes = (ms / (1000 * 60)) % 60;
+        long hours = (ms / (1000 * 60 * 60));
+        return String.format("%02d:%02d:%02d", hours, minutes, seconds);
+    }
+
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(MultithreadedStopwatch::new);
+    }
+}
