@@ -1,0 +1,62 @@
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+
+public class ImageSelector extends JFrame implements ItemListener {
+
+    private JComboBox<String> comboBox;
+    private JLabel imageLabel;
+
+    public ImageSelector() {
+        setTitle("Image Selector");
+        setSize(400, 400);
+        setLayout(new BorderLayout());
+
+      
+        String[] images = {"Apple", "Banana", "Orange"};
+
+        comboBox = new JComboBox<>(images);
+        comboBox.addItemListener(this);
+
+        imageLabel = new JLabel("", SwingConstants.CENTER);
+
+        add(comboBox, BorderLayout.NORTH);
+        add(imageLabel, BorderLayout.CENTER);
+
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setVisible(true);
+    }
+
+    @Override
+    public void itemStateChanged(ItemEvent e) {
+
+        if (e.getStateChange() == ItemEvent.SELECTED) {
+
+            String selected = comboBox.getSelectedItem().toString();
+            String path = "";
+
+            switch (selected) {
+                case "Apple":
+                    path = "apple.jpg";
+                    break;
+                case "Banana":
+                    path = "banana.jpg";
+                    break;
+                case "Orange":
+                    path = "orange.jpg";
+                    break;
+            }
+
+            ImageIcon icon = new ImageIcon(path);
+
+            Image img = icon.getImage().getScaledInstance(300, 250, Image.SCALE_SMOOTH);
+            icon = new ImageIcon(img);
+
+            imageLabel.setIcon(icon);
+        }
+    }
+
+    public static void main(String[] args) {
+        new ImageSelector();
+    }
+}
