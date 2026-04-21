@@ -1,0 +1,55 @@
+import java.util.Scanner;
+
+
+class Student {
+    int roll_no;
+
+    void getNumber(int n) {
+        roll_no = n;
+    }
+
+    void putNumber() {
+        System.out.println("Roll No: " + roll_no);
+    }
+}
+
+
+class Test extends Student {
+    float sub1, sub2;
+
+    void getMarks(float s1, float s2) {
+        sub1 = s1;
+        sub2 = s2;
+    }
+
+    void putMarks() {
+        System.out.println("Marks Obtained:");
+        System.out.println("Subject 1: " + sub1);
+        System.out.println("Subject 2: " + sub2);
+    }
+}
+
+
+class Result extends Test {
+    float total;
+
+    void display() {
+        total = sub1 + sub2;
+        putNumber();
+        putMarks();
+        System.out.println("Total Score: " + total);
+    }
+}
+
+
+public class MultilevelInheritance {
+    public static void main(String[] args) {
+        Result obj = new Result();
+  
+        obj.getNumber(101);
+        obj.getMarks(85.5f, 92.0f);
+        
+
+        obj.display();
+    }
+}
