@@ -1,0 +1,38 @@
+import javax.swing.*;
+import java.awt.*;
+
+public class BorderLayoutImplementation extends JFrame {
+    public BorderLayoutImplementation() {
+        // Set up the main Frame with BorderLayout
+        setTitle("Border Layout Example");
+        setSize(400, 300);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLayout(new BorderLayout(10, 10)); // hgap and vgap of 10px
+
+        // --- NORTH: Input Section ---
+        JPanel northPanel = new JPanel(new FlowLayout());
+        northPanel.add(new JLabel("Enter the number"));
+        northPanel.add(new JTextField(10));
+        add(northPanel, BorderLayout.NORTH);
+
+        // --- CENTER: Conversion Buttons ---
+        // Using GridLayout for the 3 buttons in the middle
+        JPanel centerPanel = new JPanel(new GridLayout(1, 3, 5, 5));
+        centerPanel.add(new JButton("Binary"));
+        centerPanel.add(new JButton("Octal"));
+        centerPanel.add(new JButton("Hex"));
+        add(centerPanel, BorderLayout.CENTER);
+
+        // --- SOUTH: Result Section ---
+        JPanel southPanel = new JPanel(new FlowLayout());
+        southPanel.add(new JLabel("Result"));
+        southPanel.add(new JTextField(10));
+        add(southPanel, BorderLayout.SOUTH);
+
+        setVisible(true);
+    }
+
+    public static void main(String[] args) {
+        new BorderLayoutImplementation();
+    }
+}
