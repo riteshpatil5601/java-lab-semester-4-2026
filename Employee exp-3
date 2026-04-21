@@ -1,0 +1,88 @@
+import java.util.Scanner;         
+ class Employee{
+ String name1,name2,name3;
+ String address1,address2,address3;
+ int salary1,salary2,salary3;
+ int b1,b2,b3;
+
+   Scanner obj=new Scanner(System.in);
+    void input()
+    { System.out.println("Manager:");
+      System.out.println("Enter name of manager:");
+      name1=obj.nextLine();
+       System.out.println("Enter address of manager:");
+       address1=obj.nextLine();
+        System.out.println("Enter Salary of manager:");
+        salary1=obj.nextInt();
+        System.out.println("Enter bonus for manager:");
+        b1=obj.nextInt();
+        obj.nextLine();
+     System.out.println("Developer:");
+      System.out.println("Enter name of Developer:");
+      name2=obj.nextLine();
+       System.out.println("Enter address of Developer:");
+       address2=obj.nextLine();
+        System.out.println("Enter Salary of Developer:");
+        salary2=obj.nextInt();
+         System.out.println("Enter bonus for Developer:");
+        b2=obj.nextInt();
+        obj.nextLine();
+    System.out.println("Programmer:");
+      System.out.println("Enter name of Programmer:");
+      name3=obj.nextLine();
+       System.out.println("Enter address of Programmer:");
+       address3=obj.nextLine();
+        System.out.println("Enter Salary of Programmer:");
+        salary3=obj.nextInt();
+         System.out.println("Enter bonus for Programmer:");
+        b3=obj.nextInt();
+
+
+    }
+}
+class Manager extends Employee
+{
+  void show()
+  {
+    System.out.println("NAME OF MANAGER:"+name1);
+        System.out.println("ADDRESS OF MANAGER:"+address1);
+    System.out.println("SALARY OF MANAGER:"+salary1);
+System.out.println("BONUS OF MANAGER:"+b1);
+}
+
+}
+class Developer extends Employee
+{
+  void how()
+  {
+    System.out.println("NAME OF DEVELOPER:"+name2);
+        System.out.println("ADDRESS OF DEVELOPER:"+address2);
+    System.out.println("SALARY OF DEVELOPER:"+salary2);
+System.out.println("BONUS OF DEVELOPER:"+b2);
+}
+
+}
+class Programmer extends Employee
+{
+    void sh()
+  {
+    System.out.println("NAME OF PROGRAMMER:"+name3);
+        System.out.println("ADDRESS OF PROGRAMMER:"+address3);
+    System.out.println("SALARY OF PROGRAMMER:"+salary3);
+System.out.println("BONUS OF PROGRAMMER:"+b3);
+}
+
+}
+
+public class Show{
+    public static void main(String[]arg)
+    {
+        Manager m=new Manager();
+        Programmer p=new Programmer();
+        Developer d=new Developer();
+        m.input();
+        m.show();
+        d.how();
+        p.sh();
+    }
+}
