@@ -1,0 +1,108 @@
+import java.util.Scanner;
+
+interface Stack {
+    int size = 5;
+
+    void push(int value);
+    int pop();
+    void display();
+    boolean overflow();
+    boolean underflow();
+}
+
+
+class IntegerStack implements Stack {
+    private int[] stack = new int[size];
+    private int top = -1;
+
+    @Override
+    public void push(int value) {
+        if (overflow()) {
+            System.out.println("Stack Overflow! Cannot push " + value);
+        } else {
+            stack[++top] = value;
+            System.out.println(value + " pushed into stack");
+        }
+    }
+
+    @Override
+    public int pop() {
+        if (underflow()) {
+            System.out.println("Stack Underflow! Cannot pop");
+            return -1;
+        } else {
+            int val = stack[top--];
+            System.out.println(val + " popped from stack");
+            return val;
+        }
+    }
+
+    @Override
+    public void display() {
+        if (underflow()) {
+            System.out.println("Stack is empty");
+        } else {
+            System.out.print("Stack elements: ");
+            for (int i = top; i >= 0; i--) {
+                System.out.print(stack[i] + " ");
+            }
+            System.out.println();
+        }
+    }
+
+    @Override
+    public boolean overflow() {
+        return top == size - 1;
+    }
+
+    @Override
+    public boolean underflow() {
+        return top == -1;
+    }
+}
+
+public class StackTest {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        IntegerStack stack = new IntegerStack();
+
+        int choice, value;
+
+        do {
+            System.out.println("\n--- Stack Menu ---");
+            System.out.println("1. Push");
+            System.out.println("2. Pop");
+            System.out.println("3. Display");
+            System.out.println("4. Exit");
+            System.out.print("Enter choice: ");
+
+            choice = sc.nextInt();
+
+            switch (choice) {
+                case 1:
+                    System.out.print("Enter value: ");
+                    value = sc.nextInt();
+                    stack.push(value);
+                    break;
+
+                case 2:
+                    stack.pop();
+                    break;
+
+                case 3:
+                    stack.display();
+                    break;
+
+                case 4:
+                    System.out.println("Exiting...");
+                    break;
+
+                default:
+                    System.out.println("Invalid choice!");
+            }
+
+        } while (choice != 4);
+
+        sc.close();
+    }
+}
