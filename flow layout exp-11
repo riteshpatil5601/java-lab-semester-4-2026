@@ -1,0 +1,26 @@
+import javax.swing.*;
+import java.awt.*;
+
+public class FlowLayoutExercise {
+    public static void main(String[] args) {
+       
+        JFrame frame = new JFrame("FlowLayout Checkboxes");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(400, 150);
+
+        
+        frame.setLayout(new FlowLayout(FlowLayout.LEFT, 10, 20));
+
+       
+        JCheckBox cb1 = new JCheckBox("Java");
+        JCheckBox cb2 = new JCheckBox("Python");
+        JCheckBox cb3 = new JCheckBox("C++");
+
+        frame.add(cb1);
+        frame.add(cb2);
+        frame.add(cb3);
+
+      
+        frame.setVisible(true);
+    }
+}
