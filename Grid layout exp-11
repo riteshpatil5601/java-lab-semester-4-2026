@@ -1,0 +1,55 @@
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+
+public class GridLayoutSwap extends JFrame implements ActionListener {
+    JButton[] buttons = new JButton[6];
+    String lastValue = "";
+    int lastIndex = -1;
+
+    public GridLayoutSwap() {
+        setTitle("GridLayout Swap Demo");
+        setSize(400, 300);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+
+        setLayout(new GridLayout(2, 3));
+
+       
+        for (int i = 0; i < 6; i++) {
+            buttons[i] = new JButton(String.valueOf(i + 1));
+            buttons[i].addActionListener(this);
+            add(buttons[i]);
+        }
+
+        setVisible(true);
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        JButton clickedButton = (JButton) e.getSource();
+        
+        if (lastIndex == -1) {
+            
+            lastValue = clickedButton.getText();
+            for (int i = 0; i < 6; i++) {
+                if (buttons[i] == clickedButton) lastIndex = i;
+            }
+            clickedButton.setBackground(Color.LIGHT_GRAY); 
+        } else {
+           
+            String currentValue = clickedButton.getText();
+            clickedButton.setText(lastValue);
+            buttons[lastIndex].setText(currentValue);
+            
+            
+            buttons[lastIndex].setBackground(null);
+            lastIndex = -1;
+            lastValue = "";
+        }
+    }
+
+    public static void main(String[] args) {
+        new GridLayoutSwap();
+    }
+}
