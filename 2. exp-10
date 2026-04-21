@@ -1,0 +1,75 @@
+import javax.swing.*;
+import java.awt.*;
+
+public class SimpleTimer extends JFrame {
+
+    private JLabel timeLabel;
+    private JButton startBtn, stopBtn;
+
+    private volatile boolean running = false;
+    private int seconds = 0;
+    private Thread timerThread;
+
+    public SimpleTimer() {
+        setTitle("Simple Timer");
+        setSize(300, 200);
+        setLayout(new BorderLayout());
+
+    
+        timeLabel = new JLabel("Time: 0 sec", SwingConstants.CENTER);
+        timeLabel.setFont(new Font("Arial", Font.BOLD, 24));
+        add(timeLabel, BorderLayout.CENTER);
+
+       
+        startBtn = new JButton("Start");
+        stopBtn = new JButton("Stop");
+
+        JPanel panel = new JPanel();
+        panel.add(startBtn);
+        panel.add(stopBtn);
+
+        add(panel, BorderLayout.SOUTH);
+
+      
+        startBtn.addActionListener(e -> startTimer());
+
+        
+        stopBtn.addActionListener(e -> stopTimer());
+
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setVisible(true);
+    }
+
+    private void startTimer() {
+        if (running) return; 
+
+        running = true;
+
+        timerThread = new Thread(() -> {
+            while (running) {
+                seconds++;
+
+              
+                SwingUtilities.invokeLater(() ->
+                        timeLabel.setText("Time: " + seconds + " sec")
+                );
+
+                try {
+                    Thread.sleep(1000); 
+                } catch (InterruptedException e) {
+                    break;
+                }
+            }
+        });
+
+        timerThread.start();
+    }
+
+    private void stopTimer() {
+        running = false;
+    }
+
+    public static void main(String[] args) {
+        new SimpleTimer();
+    }
+}
