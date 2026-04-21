@@ -1,0 +1,48 @@
+import java.util.Scanner;
+abstract class Shapes
+ 
+{
+    int dim1,dim2;
+    Scanner obj=new Scanner(System.in);
+    abstract void area();
+    
+        
+    
+    
+}
+class triangle extends Shapes
+{
+    void area()
+    {
+        System.out.println("Enter dim1:");
+        dim1=obj.nextInt();
+        System.out.println("Enter dim2");
+        dim2=obj.nextInt();
+        System.out.println("Area is :"+(0.5*(dim1*dim2)));
+
+    }
+}
+class Rectangle extends Shapes
+{ void area(){
+System.out.println("Enter dim1:");
+        dim1=obj.nextInt();
+        System.out.println("Enter dim2");
+        dim2=obj.nextInt();
+        System.out.println("Area is :"+(dim1*dim2));
+}
+}
+
+public class Area
+{
+    public static void main(String[]arg)
+    {
+        Shapes s;
+        s=new Rectangle();
+        s.area();
+        s=new triangle();
+        s.area();
+
+            
+        
+    }
+}
