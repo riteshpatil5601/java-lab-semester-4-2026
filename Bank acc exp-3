@@ -1,0 +1,44 @@
+import java.util.Scanner;
+class Bankaccount {
+   int amount;
+   int a;
+   
+    Scanner obj=new Scanner(System.in);
+    void deposit()
+    {
+        System.out.println("Enter amount to deposit");
+         amount=obj.nextInt();
+        System.out.println("Deposit amount is:"+amount);
+    }
+    void withdraw(){
+    System.out.println("Enter withdrawal amount");
+    a =obj.nextInt();
+     if((amount-a)>=100){
+    System.out.println("Aount after withdrawal:"+(amount-a));
+    }
+    }
+
+}
+class Savingaccount extends Bankaccount
+{
+  
+  
+    void withdraw()
+    { if((amount-a)<100){
+        System.out.println("Unwithdrawable amount ...");
+    }
+    }
+  
+}
+public class Record{
+    public static void main(String []arg)
+    {
+      Bankaccount b1=new Bankaccount();
+      Savingaccount s1=new Savingaccount();
+      b1.deposit();
+      b1.withdraw();
+      s1.withdraw();
+
+    }
+
+}
