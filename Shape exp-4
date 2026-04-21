@@ -1,0 +1,63 @@
+import java.util.Scanner;
+
+
+interface Shape {
+    double area();
+}
+
+
+class Rectangle implements Shape {
+    private double length, width;
+
+    Rectangle(double length, double width) {
+        this.length = length;
+        this.width = width;
+    }
+
+    @Override
+    public double area() {
+        return length * width;
+    }
+}
+
+
+class Triangle implements Shape {
+    private double base, height;
+
+    Triangle(double base, double height) {
+        this.base = base;
+        this.height = height;
+    }
+
+    @Override
+    public double area() {
+        return 0.5 * base * height;
+    }
+}
+
+// Test class
+public class ShapeTest {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+       
+        System.out.print("Enter length of rectangle: ");
+        double length = sc.nextDouble();
+        System.out.print("Enter width of rectangle: ");
+        double width = sc.nextDouble();
+
+        Shape rect = new Rectangle(length, width);
+        System.out.println("Area of Rectangle: " + rect.area());
+
+
+        System.out.print("\nEnter base of triangle: ");
+        double base = sc.nextDouble();
+        System.out.print("Enter height of triangle: ");
+        double height = sc.nextDouble();
+
+        Shape tri = new Triangle(base, height);
+        System.out.println("Area of Triangle: " + tri.area());
+
+        sc.close();
+    }
+}
