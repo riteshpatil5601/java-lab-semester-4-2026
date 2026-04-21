@@ -1,0 +1,68 @@
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+
+public class TextCounter extends JFrame implements KeyListener {
+
+    private JTextArea textArea;
+    private JLabel countLabel;
+
+    public TextCounter() {
+        setTitle("Live Text Counter");
+        setSize(400, 300);
+        setLayout(new BorderLayout());
+
+       
+        textArea = new JTextArea();
+        textArea.setFont(new Font("Arial", Font.PLAIN, 16));
+        textArea.addKeyListener(this);
+
+     
+        countLabel = new JLabel("Words: 0 | Characters: 0");
+        countLabel.setFont(new Font("Arial", Font.BOLD, 16));
+
+        add(new JScrollPane(textArea), BorderLayout.CENTER);
+        add(countLabel, BorderLayout.SOUTH);
+
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setVisible(true);
+    }
+
+   
+    private void updateCount() {
+        String text = textArea.getText();
+
+     
+        int charCount = text.length();
+
+     
+        String trimmed = text.trim();
+        int wordCount = 0;
+
+        if (!trimmed.isEmpty()) {
+            wordCount = trimmed.split("\\s+").length;
+        }
+
+        countLabel.setText("Words: " + wordCount + " | Characters: " + charCount);
+    }
+
+    @Override
+    public void keyTyped(KeyEvent e) {
+        updateCount();
+    }
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+        updateCount();
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {
+        updateCount();
+    }
+
+    public static void main(String[] args) {
+        new TextCounter();
+    }
+}
