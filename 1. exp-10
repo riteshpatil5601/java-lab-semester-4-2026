@@ -1,0 +1,44 @@
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionAdapter;
+
+public class MouseCoordinates extends JFrame {
+
+    private JLabel label;
+
+    public MouseCoordinates() {
+        setTitle("Mouse Coordinates Tracker");
+        setSize(400, 300);
+        setLayout(new BorderLayout());
+
+        label = new JLabel("Move mouse inside the window", SwingConstants.CENTER);
+        label.setFont(new Font("Arial", Font.BOLD, 18));
+
+        add(label, BorderLayout.CENTER);
+
+    
+        addMouseMotionListener(new MouseMotionAdapter() {
+            @Override
+            public void mouseMoved(MouseEvent e) {
+                int x = e.getX();
+                int y = e.getY();
+                label.setText("X: " + x + "  Y: " + y);
+            }
+
+            @Override
+            public void mouseDragged(MouseEvent e) {
+                int x = e.getX();
+                int y = e.getY();
+                label.setText("Dragging at → X: " + x + "  Y: " + y);
+            }
+        });
+
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setVisible(true);
+    }
+
+    public static void main(String[] args) {
+        new MouseCoordinates();
+    }
+}
