@@ -1,0 +1,85 @@
+import java.io.*;
+import java.util.Scanner;
+
+public class StudentDataStream {
+
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+        String fileName = "student.dat";
+
+       
+        try {
+            FileOutputStream fos = new FileOutputStream(fileName);
+            DataOutputStream dos = new DataOutputStream(fos);
+
+            System.out.print("Enter Name: ");
+            String name = sc.nextLine();
+
+            System.out.print("Enter Age: ");
+            int age = sc.nextInt();
+
+            System.out.print("Enter Weight: ");
+            float weight = sc.nextFloat();
+
+            System.out.print("Enter Height: ");
+            float height = sc.nextFloat();
+
+            sc.nextLine(); 
+
+            System.out.print("Enter City: ");
+            String city = sc.nextLine();
+
+            System.out.print("Enter Phone Number: ");
+            String phone = sc.nextLine();
+
+        
+            dos.writeUTF(name);
+            dos.writeInt(age);
+            dos.writeFloat(weight);
+            dos.writeFloat(height);
+            dos.writeUTF(city);
+            dos.writeUTF(phone);
+
+            dos.close();
+            fos.close();
+
+            System.out.println("\nData saved successfully!\n");
+
+        } catch (IOException e) {
+            System.out.println("Error while writing data: " + e.getMessage());
+        }
+
+  
+        try {
+            FileInputStream fis = new FileInputStream(fileName);
+            DataInputStream dis = new DataInputStream(fis);
+
+            System.out.println("Reading data from file...\n");
+
+            String name = dis.readUTF();
+            int age = dis.readInt();
+            float weight = dis.readFloat();
+            float height = dis.readFloat();
+            String city = dis.readUTF();
+            String phone = dis.readUTF();
+
+            dis.close();
+            fis.close();
+
+        
+            System.out.println("----- Student Details -----");
+            System.out.println("Name   : " + name);
+            System.out.println("Age    : " + age);
+            System.out.println("Weight : " + weight);
+            System.out.println("Height : " + height);
+            System.out.println("City   : " + city);
+            System.out.println("Phone  : " + phone);
+
+        } catch (IOException e) {
+            System.out.println("Error while reading data: " + e.getMessage());
+        }
+
+        sc.close();
+    }
+}
